@@ -1,0 +1,30 @@
+node_modules/
+dist/
+.vite/
+visual-checks/
+coverage/
+
+# Keep demonstration videos and personal planning outside version control.
+*.[mM][pP]4
+roadmap-c604e681-1e0c-4d51-9612-52ef1ae38557.md
+
+# Local environment files can contain credentials.
+.env
+.env.*
+*.env
+*.env.*
+
+# Temporary files and caches.
+.cache/
+.tmp/
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+*.log
+.DS_Store
+Thumbs.db
