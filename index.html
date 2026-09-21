@@ -12,10 +12,10 @@
     <title>Radmila G. — AI Automation Portfolio</title>
   </head>
   <body>
-    <a class="skip-link" href="#main">Перейти к содержанию</a>
+    <a class="skip-link" href="#main" data-ru="Перейти к содержанию" data-en="Skip to content">Перейти к содержанию</a>
 
     <header class="site-header" data-header>
-      <a class="brand" href="#home" aria-label="Radmila G. — на главную">
+      <a class="brand" href="#home" aria-label="Radmila G. — на главную" data-aria-ru="Radmila G. — на главную" data-aria-en="Radmila G. — home">
         <img src="./SVG/logo-gradient.svg" alt="" />
         <span class="brand-copy">
           <strong>Radmila G.</strong>
@@ -34,14 +34,14 @@
         <span class="sr-only" data-ru="Открыть меню" data-en="Open menu">Открыть меню</span>
       </button>
 
-      <nav class="main-nav" id="main-nav" aria-label="Основная навигация" data-nav>
+      <nav class="main-nav" id="main-nav" aria-label="Основная навигация" data-aria-ru="Основная навигация" data-aria-en="Main navigation" data-nav>
         <a href="#projects" data-ru="Проекты" data-en="Projects">Проекты</a>
         <a href="#services" data-ru="Что я создаю" data-en="What I build">Что я создаю</a>
         <a href="#about" data-ru="Обо мне" data-en="About">Обо мне</a>
       </nav>
 
       <div class="header-actions">
-        <button class="language-switch" type="button" aria-label="Переключить язык" data-language-switch>
+        <button class="language-switch" type="button" aria-label="Switch to English" data-aria-ru="Switch to English" data-aria-en="Переключить на русский" data-language-switch>
           <span class="active">RU</span><span>EN</span>
         </button>
         <a class="header-contact" href="#contact" data-ru="Связаться" data-en="Contact">Связаться</a>
@@ -55,8 +55,9 @@
             RADMILA G. · AI-РАЗРАБОТЧИК
           </p>
           <h1>
-            <span data-ru="Создаю цифровые системы," data-en="I build digital systems">Создаю цифровые системы,</span>
-            <span class="gradient-text" data-ru="которые освобождают время." data-en="that give time back.">
+            <span class="hero-title-line hero-title-line-one" data-ru="Создаю цифровые" data-en="I build digital">Создаю цифровые</span>
+            <span class="hero-title-line hero-title-line-two" data-ru="системы," data-en="systems">системы,</span>
+            <span class="hero-title-line hero-title-line-three gradient-text" data-ru="которые освобождают время." data-en="that give time back.">
               которые освобождают время.
             </span>
           </h1>
@@ -79,14 +80,60 @@
         </div>
 
         <div class="hero-light reveal" aria-hidden="true">
-          <div class="light-aura light-aura-back"></div>
-          <div class="light-aura light-aura-mid"></div>
-          <div class="light-core">
-            <span class="light-thread light-thread-one"></span>
-            <span class="light-thread light-thread-two"></span>
-            <span class="light-thread light-thread-three"></span>
-          </div>
-          <div class="light-reflection"></div>
+          <svg class="aurora-svg" viewBox="0 0 1000 760" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <defs>
+              <radialGradient id="field-cyan" gradientUnits="userSpaceOnUse" cx="610" cy="390" r="560" fx="510" fy="310">
+                <stop offset="0" stop-color="#26d1ff" stop-opacity="0.72">
+                  <animate attributeName="stop-opacity" values="0.72;0.38;0.82;0.72" dur="13s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="0.38" stop-color="#26d1ff" stop-opacity="0.31" />
+                <stop offset="0.7" stop-color="#5798ff" stop-opacity="0.13" />
+                <stop offset="1" stop-color="#5798ff" stop-opacity="0" />
+                <animate attributeName="fx" values="510;740;590;510" dur="13s" repeatCount="indefinite" />
+                <animate attributeName="fy" values="310;220;520;310" dur="17s" repeatCount="indefinite" />
+                <animate attributeName="r" values="560;670;510;560" dur="19s" repeatCount="indefinite" />
+              </radialGradient>
+              <radialGradient id="field-blue" gradientUnits="userSpaceOnUse" cx="740" cy="500" r="610" fx="870" fy="590">
+                <stop offset="0" stop-color="#5798ff" stop-opacity="0.65">
+                  <animate attributeName="stop-opacity" values="0.65;0.85;0.42;0.65" dur="17s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="0.42" stop-color="#5798ff" stop-opacity="0.3" />
+                <stop offset="0.78" stop-color="#9b78ff" stop-opacity="0.07" />
+                <stop offset="1" stop-color="#9b78ff" stop-opacity="0" />
+                <animate attributeName="fx" values="870;630;810;870" dur="17s" repeatCount="indefinite" />
+                <animate attributeName="fy" values="590;400;650;590" dur="13s" repeatCount="indefinite" />
+                <animate attributeName="r" values="610;530;690;610" dur="23s" repeatCount="indefinite" />
+              </radialGradient>
+              <radialGradient id="field-violet" gradientUnits="userSpaceOnUse" cx="900" cy="170" r="600" fx="1000" fy="110">
+                <stop offset="0" stop-color="#9b78ff" stop-opacity="0.48">
+                  <animate attributeName="stop-opacity" values="0.48;0.68;0.28;0.48" dur="23s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="0.36" stop-color="#9b78ff" stop-opacity="0.28" />
+                <stop offset="0.72" stop-color="#5798ff" stop-opacity="0.08" />
+                <stop offset="1" stop-color="#5798ff" stop-opacity="0" />
+                <animate attributeName="fx" values="1000;780;1080;1000" dur="19s" repeatCount="indefinite" />
+                <animate attributeName="fy" values="110;350;180;110" dur="23s" repeatCount="indefinite" />
+                <animate attributeName="r" values="600;730;550;600" dur="17s" repeatCount="indefinite" />
+              </radialGradient>
+              <filter id="aurora-field-diffusion" filterUnits="userSpaceOnUse" x="-200" y="-200" width="1500" height="1160" color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.0037 0.0049" numOctaves="2" seed="23" result="organic-noise">
+                  <animate attributeName="baseFrequency" values="0.0037 0.0049;0.0053 0.0031;0.0028 0.006;0.0037 0.0049" dur="17s" calcMode="spline" keyTimes="0;0.33;0.67;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1" repeatCount="indefinite" />
+                </feTurbulence>
+                <feColorMatrix in="organic-noise" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1.8 0 0 0 -0.25" result="density" />
+                <feGaussianBlur in="density" stdDeviation="10" result="soft-density" />
+                <feComposite in="SourceGraphic" in2="soft-density" operator="in" result="light-mass" />
+                <feDisplacementMap in="light-mass" in2="organic-noise" scale="230" xChannelSelector="R" yChannelSelector="G">
+                  <animate attributeName="scale" values="230;310;170;230" dur="13s" repeatCount="indefinite" />
+                </feDisplacementMap>
+                <feGaussianBlur stdDeviation="6" />
+              </filter>
+            </defs>
+            <g class="aurora-field" filter="url(#aurora-field-diffusion)">
+              <rect x="-200" y="-200" width="1500" height="1160" fill="url(#field-blue)" />
+              <rect x="-200" y="-200" width="1500" height="1160" fill="url(#field-violet)" />
+              <rect x="-200" y="-200" width="1500" height="1160" fill="url(#field-cyan)" />
+            </g>
+          </svg>
         </div>
 
         <div class="hero-foot" aria-label="Направления работы">
@@ -98,48 +145,48 @@
         <div class="projects-ambient" aria-hidden="true"></div>
         <div class="section-heading reveal">
           <div>
-            <p class="section-index">01 · SELECTED WORK</p>
+            <p class="section-index" data-ru="01 · ПРОЕКТЫ" data-en="01 · SELECTED WORK">01 · ПРОЕКТЫ</p>
             <h2 data-ru="Проекты, собранные вокруг реальных задач" data-en="Projects built around real needs">
               Проекты, собранные вокруг реальных задач
             </h2>
           </div>
           <p
-            data-ru="AI-инструменты, веб-сайты и автоматизации — без учебных заглушек и вымышленных кейсов."
-            data-en="AI tools, websites and automations — no fictional case studies or filler projects."
+            data-ru="Голосовые агенты, работа с почтой и файлами, подготовка предложений. Смотрите, как инструменты решают задачи, в коротких демо."
+            data-en="Voice agents, email and file workflows, and proposal tools. See them in action through short video demos."
           >
-            AI-инструменты, веб-сайты и автоматизации — без учебных заглушек и вымышленных кейсов.
+            Голосовые агенты, работа с почтой и файлами, подготовка предложений. Смотрите, как инструменты решают задачи, в коротких демо.
           </p>
         </div>
 
         <div class="project-group" aria-labelledby="ai-projects-title">
           <div class="group-heading reveal">
             <p class="group-number">01 / 03</p>
-            <h3 id="ai-projects-title" data-ru="Основные AI-проекты" data-en="Featured AI projects">Основные AI-проекты</h3>
+            <h3 id="ai-projects-title" data-ru="AI-агенты и автоматизация" data-en="AI agents & automation">AI-агенты и автоматизация</h3>
           </div>
           <div id="ai-projects" class="project-list project-list-featured"></div>
         </div>
 
-        <div class="project-group" aria-labelledby="web-projects-title">
+        <div class="project-group" aria-labelledby="creative-projects-title">
           <div class="group-heading reveal">
             <p class="group-number">02 / 03</p>
-            <h3 id="web-projects-title" data-ru="Веб-сайты" data-en="Websites">Веб-сайты</h3>
+            <h3 id="creative-projects-title" data-ru="AI в искусстве и образовании" data-en="AI for art & learning">AI в искусстве и образовании</h3>
           </div>
-          <div id="web-projects" class="project-list project-list-grid"></div>
+          <div id="creative-projects" class="project-list"></div>
         </div>
 
-        <div class="project-group" aria-labelledby="automation-projects-title">
+        <div class="project-group web-project-group" aria-labelledby="web-projects-title">
           <div class="group-heading reveal">
             <p class="group-number">03 / 03</p>
-            <h3 id="automation-projects-title" data-ru="Автоматизации" data-en="Automations">Автоматизации</h3>
+            <h3 id="web-projects-title" data-ru="Веб-проекты" data-en="Web projects">Веб-проекты</h3>
           </div>
-          <div id="automation-projects" class="project-list project-list-grid automation-grid"></div>
+          <div id="web-projects" class="project-list project-list-grid"></div>
         </div>
       </section>
 
       <section class="section shell services" id="services">
         <div class="section-heading reveal">
           <div>
-            <p class="section-index">02 · WHAT I BUILD</p>
+            <p class="section-index" data-ru="02 · ЧТО Я СОЗДАЮ" data-en="02 · WHAT I BUILD">02 · ЧТО Я СОЗДАЮ</p>
             <h2 data-ru="От задачи — к работающей системе" data-en="From a task to a working system">
               От задачи — к работающей системе
             </h2>
@@ -188,7 +235,7 @@
 
       <section class="section shell about" id="about">
         <div class="about-title reveal">
-          <p class="section-index">03 · ABOUT</p>
+          <p class="section-index" data-ru="03 · ОБО МНЕ" data-en="03 · ABOUT">03 · ОБО МНЕ</p>
           <h2 data-ru="Творчество, системность и технологии." data-en="Creativity, structure and technology.">
             Творчество, системность и технологии.
           </h2>
@@ -221,7 +268,7 @@
 
       <section class="section shell contact" id="contact">
         <div class="contact-panel reveal">
-          <p class="section-index">04 · CONTACT</p>
+          <p class="section-index" data-ru="04 · КОНТАКТЫ" data-en="04 · CONTACT">04 · КОНТАКТЫ</p>
           <h2 data-ru="Есть задача, которую съедает рутина?" data-en="Is routine consuming your time?">
             Есть задача, которую съедает рутина?
           </h2>
@@ -247,6 +294,17 @@
       <p>© <span data-current-year>2026</span> Radmila G.</p>
       <a href="#home" data-ru="Наверх ↑" data-en="Back to top ↑">Наверх ↑</a>
     </footer>
+
+    <dialog id="demo-dialog" class="demo-dialog" aria-labelledby="demo-title" aria-describedby="demo-summary">
+      <div class="demo-heading">
+        <h2 id="demo-title"></h2>
+        <button class="demo-close" type="button" data-close-demo autofocus data-aria-ru="Закрыть видео" data-aria-en="Close video" aria-label="Закрыть видео">×</button>
+      </div>
+      <video id="demo-player" controls playsinline preload="none" aria-describedby="demo-summary"></video>
+      <p id="demo-summary" class="demo-summary"></p>
+      <p id="demo-error" class="demo-error" role="alert" hidden data-ru="Не удалось воспроизвести видео. Попробуйте открыть файл по ссылке ниже." data-en="The video could not be played. Try opening the file using the link below."></p>
+      <a id="demo-download" class="demo-file-link" target="_blank" rel="noreferrer" data-ru="Открыть видео отдельно ↗" data-en="Open video in a new tab ↗">Открыть видео отдельно ↗</a>
+    </dialog>
 
     <script type="module" src="/src/main.ts"></script>
   </body>

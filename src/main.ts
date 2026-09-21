@@ -1,130 +1,36 @@
 import './styles.css'
-import roadmapCoverUrl from '../Video/ai-roadmap-cover.png'
-import artDetectiveCoverUrl from '../ChatGPT Image 7 сент. 2026 г., 12_32_44.png'
-
-type Language = 'ru' | 'en'
-
-type LocalizedText = {
-  ru: string
-  en: string
-}
-
-type Project = {
-  name: string
-  eyebrow: string
-  kind: 'featured' | 'standard' | 'automation'
-  description?: LocalizedText
-  tags?: string[]
-  cover?: string
-  accent: string
-  mark: string
-  status?: LocalizedText
-}
-
-const aiProjects: Project[] = [
-  {
-    name: 'AI Roadmap Generator',
-    eyebrow: 'PROJECT 01',
-    kind: 'featured',
-    description: {
-      ru: 'Голосовой AI‑агент проводит адаптивное интервью в три раунда, распознаёт ответы и формирует персональный пошаговый план действий.',
-      en: 'A voice AI agent runs a three-round adaptive interview, transcribes answers and generates a personalized action plan.',
-    },
-    tags: ['Next.js', 'Cloudflare', 'NanoGPT', 'Groq Whisper'],
-    cover: roadmapCoverUrl,
-    accent: 'cyan',
-    mark: 'AI / 01',
-    status: {
-      ru: 'Обложка и демонстрация подготовлены',
-      en: 'Cover and demo are ready',
-    },
-  },
-  {
-    name: 'Art Detective',
-    eyebrow: 'PROJECT 02',
-    kind: 'standard',
-    cover: artDetectiveCoverUrl,
-    tags: ['AI PROJECT'],
-    accent: 'violet',
-    mark: 'ART / AI',
-    status: {
-      ru: 'Описание добавим после анализа проекта',
-      en: 'Details will follow after project review',
-    },
-  },
-]
-
-const webProjects: Project[] = [
-  { name: 'PCServiceDemo Nexora', eyebrow: 'WEB 01', kind: 'standard', accent: 'blue', mark: 'NEXORA' },
-  { name: 'English website', eyebrow: 'WEB 02', kind: 'standard', accent: 'cyan', mark: 'ENGLISH' },
-  { name: 'NORDEN-HOME', eyebrow: 'WEB 03', kind: 'standard', accent: 'violet', mark: 'NORDEN' },
-  { name: 'MIRA', eyebrow: 'WEB 04', kind: 'standard', accent: 'blue', mark: 'MIRA' },
-  { name: 'artcloseup', eyebrow: 'WEB 05', kind: 'standard', accent: 'cyan', mark: 'ART / WEB' },
-]
-
-const automationProjects: Project[] = [
-  { name: 'AI Page Assistant', eyebrow: 'DEMO 01', kind: 'automation', accent: 'cyan', mark: 'PAGE / AI' },
-  { name: 'AI Quote Assistant', eyebrow: 'DEMO 02', kind: 'automation', accent: 'violet', mark: 'QUOTE / AI' },
-  { name: 'Smart Downloads Sorter', eyebrow: 'DEMO 03', kind: 'automation', accent: 'blue', mark: 'SORT / FILES' },
-  { name: 'Yandex Mail Agent', eyebrow: 'DEMO 04', kind: 'automation', accent: 'cyan', mark: 'MAIL / AI' },
-]
+import { aiProjects, creativeProjects, webProjects, type Language, type Project } from './projects'
 
 let currentLanguage: Language = 'ru'
 
 const escapeHtml = (value: string): string =>
   value.replace(/[&<>'"]/g, (character) => {
     const entities: Record<string, string> = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      "'": '&#39;',
-      '"': '&quot;',
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;',
     }
     return entities[character]
   })
 
-const projectVisual = (project: Project): string => {
-  if (project.cover) {
-    return `
-      <div class="project-media project-media-cover">
-        <img src="${project.cover}" alt="${escapeHtml(project.name)}" />
-        <span class="cover-shade" aria-hidden="true"></span>
-      </div>
-    `
-  }
-
-  return `
-    <div class="project-media project-media-abstract accent-${project.accent}" aria-hidden="true">
-      <span class="project-mark">${escapeHtml(project.mark)}</span>
-      <span class="project-stroke project-stroke-one"></span>
-      <span class="project-stroke project-stroke-two"></span>
-      <span class="project-dot"></span>
-    </div>
-  `
-}
-
 const projectCard = (project: Project): string => {
-  const description = project.description?.[currentLanguage]
-  const defaultStatus = currentLanguage === 'ru' ? 'Содержание уточним после анализа проекта' : 'Details will follow after project review'
-  const status = project.status?.[currentLanguage] ?? defaultStatus
+  const label = currentLanguage === 'ru' ? 'Смотреть демо' : 'Watch demo'
   const tags = project.tags?.length
-    ? `<ul class="tags" aria-label="${currentLanguage === 'ru' ? 'Технологии' : 'Technologies'}">${project.tags
-        .map((tag) => `<li>${escapeHtml(tag)}</li>`)
-        .join('')}</ul>`
+    ? `<ul class="tags" aria-label="${currentLanguage === 'ru' ? 'Технологии' : 'Technologies'}">${project.tags.map(tag => `<li>${escapeHtml(tag)}</li>`).join('')}</ul>`
     : ''
-
   return `
-    <article class="project-card project-card-${project.kind} reveal">
-      ${projectVisual(project)}
+    <article class="project-card project-card-${project.kind} reveal" id="${project.id}">
+      ${project.cover ? `<div class="project-media project-media-cover ${project.portrait ? 'project-media-portrait' : ''}">
+        <img src="${escapeHtml(project.cover)}" alt="" loading="lazy" decoding="async" width="${project.portrait ? 570 : 960}" height="${project.portrait ? 860 : 540}" />
+        <span class="cover-shade" aria-hidden="true"></span>
+      </div>` : ''}
       <div class="project-copy">
-        <p class="project-number">${escapeHtml(project.eyebrow)}</p>
+        <p class="project-number">${escapeHtml(project.type[currentLanguage])}</p>
         <h4>${escapeHtml(project.name)}</h4>
-        ${description ? `<p class="project-description">${escapeHtml(description)}</p>` : ''}
+        ${project.description ? `<p class="project-description">${escapeHtml(project.description[currentLanguage])}</p>` : ''}
         ${tags}
-        <p class="project-status"><span aria-hidden="true"></span>${escapeHtml(status)}</p>
+        ${project.status ? `<p class="project-status"><span aria-hidden="true"></span>${escapeHtml(project.status[currentLanguage])}</p>` : ''}
+        ${project.video ? `<div class="project-actions"><button class="button button-quiet demo-button" type="button" data-demo="${project.id}" aria-haspopup="dialog" aria-controls="demo-dialog" aria-label="${label} — ${escapeHtml(project.name)}"><span aria-hidden="true">▷</span>${label}</button><span class="demo-duration" aria-label="${currentLanguage === 'ru' ? 'Длительность видео' : 'Video duration'}">${project.duration}</span></div>` : ''}
       </div>
-    </article>
-  `
+    </article>`
 }
 
 // Glue short Russian words to the following word, including generated cards.
@@ -144,7 +50,7 @@ const renderProjects = (): void => {
   const groups: Array<[string, Project[]]> = [
     ['ai-projects', aiProjects],
     ['web-projects', webProjects],
-    ['automation-projects', automationProjects],
+    ['creative-projects', creativeProjects],
   ]
 
   groups.forEach(([id, projects]) => {
@@ -170,7 +76,9 @@ const updateLanguage = (language: Language): void => {
     label.classList.toggle('active', label.textContent?.toLowerCase() === language)
   })
 
+  document.querySelector('meta[name="description"]')?.setAttribute('content', language === 'ru' ? 'Radmila G. — AI-агенты, автоматизация и веб-решения. Работающие проекты и видеодемонстрации.' : 'Radmila G. — AI agents, automation and web tools. Working projects and video demos.')
   renderProjects()
+  updateMenuLabel()
   activateRevealObserver()
 }
 
@@ -185,17 +93,94 @@ const navigation = document.querySelector<HTMLElement>('[data-nav]')
 const closeMenu = (): void => {
   menuToggle?.setAttribute('aria-expanded', 'false')
   navigation?.classList.remove('is-open')
+  updateMenuLabel()
 }
 
 menuToggle?.addEventListener('click', () => {
   const isOpen = menuToggle.getAttribute('aria-expanded') === 'true'
   menuToggle.setAttribute('aria-expanded', String(!isOpen))
   navigation?.classList.toggle('is-open', !isOpen)
+  updateMenuLabel()
 })
 
 navigation?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu))
 
+const updateMenuLabel = (): void => {
+  const isOpen = menuToggle?.getAttribute('aria-expanded') === 'true'
+  const label = menuToggle?.querySelector('.sr-only')
+  if (label) label.textContent = currentLanguage === 'ru'
+    ? (isOpen ? 'Закрыть меню' : 'Открыть меню')
+    : (isOpen ? 'Close menu' : 'Open menu')
+}
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && navigation?.classList.contains('is-open')) {
+    closeMenu()
+    menuToggle?.focus()
+  }
+})
+
+// A single native dialog keeps focus inside the player and supports Escape.
+// No video src exists until a visitor requests a demo.
+const demoDialog = document.querySelector<HTMLDialogElement>('#demo-dialog')!
+const demoPlayer = document.querySelector<HTMLVideoElement>('#demo-player')!
+const demoTitle = document.querySelector<HTMLElement>('#demo-title')!
+const demoSummary = document.querySelector<HTMLElement>('#demo-summary')!
+const demoError = document.querySelector<HTMLElement>('#demo-error')!
+const demoDownload = document.querySelector<HTMLAnchorElement>('#demo-download')!
+let demoTrigger: HTMLButtonElement | null = null
+
+document.querySelector('#projects')?.addEventListener('click', (event) => {
+  const button = (event.target as Element).closest<HTMLButtonElement>('[data-demo]')
+  const project = aiProjects.find(item => item.id === button?.dataset.demo)
+  if (!button || !project?.video) return
+  demoTrigger = button
+  demoTitle.textContent = project.name
+  demoSummary.textContent = project.description?.[currentLanguage] ?? ''
+  demoError.hidden = true
+  demoPlayer.poster = project.cover ?? ''
+  demoPlayer.src = project.video
+  demoPlayer.setAttribute('aria-label', `${currentLanguage === 'ru' ? 'Демонстрация' : 'Demo'}: ${project.name}`)
+  demoDownload.href = project.video
+  demoDialog.showModal()
+  document.body.classList.add('demo-open')
+  // Playback follows an explicit click. If the browser blocks it, native Play remains.
+  void demoPlayer.play().catch(() => { /* Native controls remain available. */ })
+})
+
+demoPlayer.addEventListener('error', () => { demoError.hidden = false })
+document.querySelector('[data-close-demo]')?.addEventListener('click', () => demoDialog.close())
+demoDialog.addEventListener('click', (event) => {
+  if (event.target !== demoDialog) return
+  const rect = demoDialog.getBoundingClientRect()
+  if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) demoDialog.close()
+})
+demoDialog.addEventListener('close', () => {
+  demoPlayer.pause()
+  demoPlayer.removeAttribute('src')
+  demoPlayer.load()
+  demoDownload.removeAttribute('href')
+  document.body.classList.remove('demo-open')
+  demoTrigger?.focus({ preventScroll: true })
+})
+
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+// SVG filter/shape animations need an explicit pause; CSS media rules cover transforms.
+const auroraScene = document.querySelector<SVGSVGElement>('.aurora-svg')
+const syncAuroraMotion = (): void => {
+  if (!auroraScene) return
+  if (reducedMotion.matches) {
+    auroraScene.pauseAnimations()
+    auroraScene.setCurrentTime(0)
+  } else if (document.hidden) {
+    auroraScene.pauseAnimations()
+  } else {
+    auroraScene.unpauseAnimations()
+  }
+}
+syncAuroraMotion()
+reducedMotion.addEventListener('change', syncAuroraMotion)
+document.addEventListener('visibilitychange', syncAuroraMotion)
 let revealObserver: IntersectionObserver | undefined
 
 function activateRevealObserver(): void {
@@ -234,6 +219,5 @@ window.addEventListener('resize', () => {
 const currentYear = document.querySelector<HTMLElement>('[data-current-year]')
 if (currentYear) currentYear.textContent = String(new Date().getFullYear())
 
-renderProjects()
-activateRevealObserver()
+updateLanguage(currentLanguage)
 updateHeader()
