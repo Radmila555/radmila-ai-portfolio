@@ -2,6 +2,7 @@ import './styles.css'
 import { aiProjects, creativeProjects, webProjects, type Language, type Project } from './projects'
 
 let currentLanguage: Language = 'ru'
+let stopHeroEntrance = (): void => {}
 
 const escapeHtml = (value: string): string =>
   value.replace(/[&<>'"]/g, (character) => {
@@ -61,6 +62,7 @@ const renderProjects = (): void => {
 }
 
 const updateLanguage = (language: Language): void => {
+  stopHeroEntrance()
   currentLanguage = language
   document.documentElement.lang = language
 
@@ -165,22 +167,40 @@ demoDialog.addEventListener('close', () => {
 })
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-// SVG filter/shape animations need an explicit pause; CSS media rules cover transforms.
-const auroraScene = document.querySelector<SVGSVGElement>('.aurora-svg')
-const syncAuroraMotion = (): void => {
-  if (!auroraScene) return
-  if (reducedMotion.matches) {
-    auroraScene.pauseAnimations()
-    auroraScene.setCurrentTime(0)
-  } else if (document.hidden) {
-    auroraScene.pauseAnimations()
-  } else {
-    auroraScene.unpauseAnimations()
+
+// Run only at boot. The real heading text stays in place and readable throughout.
+const startHeroEntrance = (): void => {
+  if (reducedMotion.matches) return
+  const copy = document.querySelector<HTMLElement>('.hero-copy')
+  if (!copy) return
+  const features = copy.querySelector<HTMLElement>('.hero-features')
+  let fallback = 0
+
+  const finish = (): void => {
+    window.clearTimeout(fallback)
+    copy.classList.remove('hero-entering')
+    features?.removeEventListener('animationend', finish)
+    reducedMotion.removeEventListener('change', finish)
+    stopHeroEntrance = () => {}
   }
+  stopHeroEntrance = finish
+  fallback = window.setTimeout(finish, 1350)
+  features?.addEventListener('animationend', finish, { once: true })
+  reducedMotion.addEventListener('change', finish, { once: true })
+  copy.classList.add('hero-entering')
 }
-syncAuroraMotion()
-reducedMotion.addEventListener('change', syncAuroraMotion)
-document.addEventListener('visibilitychange', syncAuroraMotion)
+
+// The scene never gates the hero text, so it starts once the page is idle.
+const heroCanvas = document.querySelector<HTMLCanvasElement>('[data-hero-scene]')
+if (heroCanvas) {
+  const startScene = (): void => {
+    void import('./hero-scene').then(({ initHeroScene }) => initHeroScene(heroCanvas))
+  }
+  const idle = window.requestIdleCallback
+  if (typeof idle === 'function') idle(startScene, { timeout: 1200 })
+  else window.setTimeout(startScene, 200)
+}
+
 let revealObserver: IntersectionObserver | undefined
 
 function activateRevealObserver(): void {
@@ -220,4 +240,5 @@ const currentYear = document.querySelector<HTMLElement>('[data-current-year]')
 if (currentYear) currentYear.textContent = String(new Date().getFullYear())
 
 updateLanguage(currentLanguage)
+startHeroEntrance()
 updateHeader()

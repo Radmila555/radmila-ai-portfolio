@@ -44,22 +44,25 @@
         <button class="language-switch" type="button" aria-label="Switch to English" data-aria-ru="Switch to English" data-aria-en="Переключить на русский" data-language-switch>
           <span class="active">RU</span><span>EN</span>
         </button>
-        <a class="header-contact" href="#contact" data-ru="Связаться" data-en="Contact">Связаться</a>
+        <a class="header-contact" href="#contact">
+          <span data-ru="Связаться" data-en="Contact">Связаться</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M21 3 10.5 13.5M21 3l-6.8 18-3.7-7.5L3 9.8 21 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+          </svg>
+        </a>
       </div>
     </header>
 
     <main id="main">
       <section class="hero shell" id="home">
-        <div class="hero-copy reveal">
-          <p class="eyebrow" data-ru="RADMILA G. · AI-РАЗРАБОТЧИК" data-en="RADMILA G. · AI DEVELOPER">
-            RADMILA G. · AI-РАЗРАБОТЧИК
+        <div class="hero-copy">
+          <p class="eyebrow hero-eyebrow">
+            <i aria-hidden="true"></i>
+            <span data-ru="RADMILA G. · AI-РАЗРАБОТЧИК" data-en="RADMILA G. · AI DEVELOPER">RADMILA G. · AI-РАЗРАБОТЧИК</span>
           </p>
           <h1>
-            <span class="hero-title-line hero-title-line-one" data-ru="Создаю цифровые" data-en="I build digital">Создаю цифровые</span>
-            <span class="hero-title-line hero-title-line-two" data-ru="системы," data-en="systems">системы,</span>
-            <span class="hero-title-line hero-title-line-three gradient-text" data-ru="которые освобождают время." data-en="that give time back.">
-              которые освобождают время.
-            </span>
+            <span class="hero-title-line" data-ru="Создаю цифровые системы," data-en="I build digital systems">Создаю цифровые системы,</span>
+            <span class="hero-title-line gradient-text" data-ru="которые освобождают время." data-en="that free up your time.">которые освобождают время.</span>
           </h1>
           <p
             class="hero-lead"
@@ -71,73 +74,71 @@
           <div class="hero-actions">
             <a class="button button-primary" href="#projects">
               <span data-ru="Смотреть проекты" data-en="View projects">Смотреть проекты</span>
-              <span aria-hidden="true">↘</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
             </a>
-            <a class="button button-quiet" href="#contact" data-ru="Обсудить задачу" data-en="Discuss a project">
-              Обсудить задачу
+            <a class="button button-quiet" href="#contact">
+              <span data-ru="Обсудить задачу" data-en="Discuss a project">Обсудить задачу</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-8.9A8.4 8.4 0 1 1 21 11.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+              </svg>
             </a>
           </div>
+
+          <ul class="hero-features">
+            <li>
+              <span class="feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <span class="feature-copy">
+                <strong data-ru="Автоматизация" data-en="Automation">Автоматизация</strong>
+                <small data-ru="Снимает рутину" data-en="Removes the routine">Снимает рутину</small>
+              </span>
+            </li>
+            <li>
+              <span class="feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path d="M12 3v4m0 0-6 9m6-9 6 9M6 16h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                  <circle cx="12" cy="3.6" r="1.9" fill="none" stroke="currentColor" stroke-width="1.6" />
+                  <circle cx="5.4" cy="17.4" r="1.9" fill="none" stroke="currentColor" stroke-width="1.6" />
+                  <circle cx="18.6" cy="17.4" r="1.9" fill="none" stroke="currentColor" stroke-width="1.6" />
+                </svg>
+              </span>
+              <span class="feature-copy">
+                <strong data-ru="AI‑агенты" data-en="AI agents">AI‑агенты</strong>
+                <small data-ru="Выполняют задачи" data-en="They do the work">Выполняют задачи</small>
+              </span>
+            </li>
+            <li>
+              <span class="feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path d="M12 2.6 20.5 7v10L12 21.4 3.5 17V7L12 2.6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                  <path d="M3.5 7 12 11.7 20.5 7M12 11.7v9.7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <span class="feature-copy">
+                <strong data-ru="Веб‑решения" data-en="Web solutions">Веб‑решения</strong>
+                <small data-ru="Под задачу бизнеса" data-en="Built for the business">Под задачу бизнеса</small>
+              </span>
+            </li>
+          </ul>
         </div>
 
-        <div class="hero-light reveal" aria-hidden="true">
-          <svg class="aurora-svg" viewBox="0 0 1000 760" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <defs>
-              <radialGradient id="field-cyan" gradientUnits="userSpaceOnUse" cx="610" cy="390" r="560" fx="510" fy="310">
-                <stop offset="0" stop-color="#26d1ff" stop-opacity="0.72">
-                  <animate attributeName="stop-opacity" values="0.72;0.38;0.82;0.72" dur="13s" repeatCount="indefinite" />
-                </stop>
-                <stop offset="0.38" stop-color="#26d1ff" stop-opacity="0.31" />
-                <stop offset="0.7" stop-color="#5798ff" stop-opacity="0.13" />
-                <stop offset="1" stop-color="#5798ff" stop-opacity="0" />
-                <animate attributeName="fx" values="510;740;590;510" dur="13s" repeatCount="indefinite" />
-                <animate attributeName="fy" values="310;220;520;310" dur="17s" repeatCount="indefinite" />
-                <animate attributeName="r" values="560;670;510;560" dur="19s" repeatCount="indefinite" />
-              </radialGradient>
-              <radialGradient id="field-blue" gradientUnits="userSpaceOnUse" cx="740" cy="500" r="610" fx="870" fy="590">
-                <stop offset="0" stop-color="#5798ff" stop-opacity="0.65">
-                  <animate attributeName="stop-opacity" values="0.65;0.85;0.42;0.65" dur="17s" repeatCount="indefinite" />
-                </stop>
-                <stop offset="0.42" stop-color="#5798ff" stop-opacity="0.3" />
-                <stop offset="0.78" stop-color="#9b78ff" stop-opacity="0.07" />
-                <stop offset="1" stop-color="#9b78ff" stop-opacity="0" />
-                <animate attributeName="fx" values="870;630;810;870" dur="17s" repeatCount="indefinite" />
-                <animate attributeName="fy" values="590;400;650;590" dur="13s" repeatCount="indefinite" />
-                <animate attributeName="r" values="610;530;690;610" dur="23s" repeatCount="indefinite" />
-              </radialGradient>
-              <radialGradient id="field-violet" gradientUnits="userSpaceOnUse" cx="900" cy="170" r="600" fx="1000" fy="110">
-                <stop offset="0" stop-color="#9b78ff" stop-opacity="0.48">
-                  <animate attributeName="stop-opacity" values="0.48;0.68;0.28;0.48" dur="23s" repeatCount="indefinite" />
-                </stop>
-                <stop offset="0.36" stop-color="#9b78ff" stop-opacity="0.28" />
-                <stop offset="0.72" stop-color="#5798ff" stop-opacity="0.08" />
-                <stop offset="1" stop-color="#5798ff" stop-opacity="0" />
-                <animate attributeName="fx" values="1000;780;1080;1000" dur="19s" repeatCount="indefinite" />
-                <animate attributeName="fy" values="110;350;180;110" dur="23s" repeatCount="indefinite" />
-                <animate attributeName="r" values="600;730;550;600" dur="17s" repeatCount="indefinite" />
-              </radialGradient>
-              <filter id="aurora-field-diffusion" filterUnits="userSpaceOnUse" x="-200" y="-200" width="1500" height="1160" color-interpolation-filters="sRGB">
-                <feTurbulence type="fractalNoise" baseFrequency="0.0037 0.0049" numOctaves="2" seed="23" result="organic-noise">
-                  <animate attributeName="baseFrequency" values="0.0037 0.0049;0.0053 0.0031;0.0028 0.006;0.0037 0.0049" dur="17s" calcMode="spline" keyTimes="0;0.33;0.67;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1" repeatCount="indefinite" />
-                </feTurbulence>
-                <feColorMatrix in="organic-noise" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1.8 0 0 0 -0.25" result="density" />
-                <feGaussianBlur in="density" stdDeviation="10" result="soft-density" />
-                <feComposite in="SourceGraphic" in2="soft-density" operator="in" result="light-mass" />
-                <feDisplacementMap in="light-mass" in2="organic-noise" scale="230" xChannelSelector="R" yChannelSelector="G">
-                  <animate attributeName="scale" values="230;310;170;230" dur="13s" repeatCount="indefinite" />
-                </feDisplacementMap>
-                <feGaussianBlur stdDeviation="6" />
-              </filter>
-            </defs>
-            <g class="aurora-field" filter="url(#aurora-field-diffusion)">
-              <rect x="-200" y="-200" width="1500" height="1160" fill="url(#field-blue)" />
-              <rect x="-200" y="-200" width="1500" height="1160" fill="url(#field-violet)" />
-              <rect x="-200" y="-200" width="1500" height="1160" fill="url(#field-cyan)" />
-            </g>
-          </svg>
+        <div class="hero-visual" aria-hidden="true">
+          <canvas data-hero-scene></canvas>
         </div>
 
-        <div class="hero-foot" aria-label="Направления работы">
-          <span>AI AGENTS</span><i></i><span>AUTOMATION</span><i></i><span>WEB SOLUTIONS</span>
+        <div class="hero-captions">
+          <p class="hero-caption hero-caption-left">
+            <i aria-hidden="true"></i>
+            <span data-ru="Больше, чем технологии — это свобода" data-en="More than technology — this is freedom">Больше, чем технологии — это свобода</span>
+          </p>
+          <p class="hero-caption hero-caption-right" aria-hidden="true">
+            <span>IDEAS</span><i></i><span>SYSTEMS</span><i></i><span>FREEDOM</span>
+          </p>
         </div>
       </section>
 
