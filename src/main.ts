@@ -1,5 +1,5 @@
 import './styles.css'
-import { aiProjects, creativeProjects, webProjects, type Language, type Project } from './projects'
+import { aiProjects, creativeProjects, type Language, type Project } from './projects'
 
 let currentLanguage: Language = 'ru'
 let stopHeroEntrance = (): void => {}
@@ -12,27 +12,65 @@ const escapeHtml = (value: string): string =>
     return entities[character]
   })
 
-const projectCard = (project: Project): string => {
+const demoButton = (project: Project): string => {
   const label = currentLanguage === 'ru' ? 'Смотреть демо' : 'Watch demo'
-  const tags = project.tags?.length
-    ? `<ul class="tags" aria-label="${currentLanguage === 'ru' ? 'Технологии' : 'Technologies'}">${project.tags.map(tag => `<li>${escapeHtml(tag)}</li>`).join('')}</ul>`
-    : ''
+  return `<button class="button button-quiet demo-button" type="button" data-demo="${project.id}" aria-haspopup="dialog" aria-controls="demo-dialog" aria-label="${label} — ${escapeHtml(project.name)}"><span aria-hidden="true">▷</span>${label}</button>`
+}
+
+const featuredCase = (project: Project, index: number): string => {
+  const feature = project.feature!
+  const roleLabel = currentLanguage === 'ru' ? 'Моя роль' : 'My role'
+  const resultLabel = currentLanguage === 'ru' ? 'Результат' : 'Result'
   return `
-    <article class="project-card project-card-${project.kind} reveal" id="${project.id}">
-      ${project.cover ? `<div class="project-media project-media-cover ${project.portrait ? 'project-media-portrait' : ''}">
-        <img src="${escapeHtml(project.cover)}" alt="" loading="lazy" decoding="async" width="${project.portrait ? 570 : 960}" height="${project.portrait ? 860 : 540}" />
-        <span class="cover-shade" aria-hidden="true"></span>
-      </div>` : ''}
-      <div class="project-copy">
-        <p class="project-number">${escapeHtml(project.type[currentLanguage])}</p>
-        <h4>${escapeHtml(project.name)}</h4>
-        ${project.description ? `<p class="project-description">${escapeHtml(project.description[currentLanguage])}</p>` : ''}
-        ${tags}
-        ${project.status ? `<p class="project-status"><span aria-hidden="true"></span>${escapeHtml(project.status[currentLanguage])}</p>` : ''}
-        ${project.video ? `<div class="project-actions"><button class="button button-quiet demo-button" type="button" data-demo="${project.id}" aria-haspopup="dialog" aria-controls="demo-dialog" aria-label="${label} — ${escapeHtml(project.name)}"><span aria-hidden="true">▷</span>${label}</button><span class="demo-duration" aria-label="${currentLanguage === 'ru' ? 'Длительность видео' : 'Video duration'}">${project.duration}</span></div>` : ''}
+    <article class="featured-case ${index === 1 ? 'featured-case-reverse' : ''} featured-case-${project.id}" id="${project.id}">
+      <div class="featured-intro">
+        <p class="featured-index"><span>0${index + 1} / 03</span>${escapeHtml(project.name)}</p>
+        <h4>${escapeHtml(feature.heading[currentLanguage])}</h4>
+        <p class="featured-description">${escapeHtml(project.description?.[currentLanguage] ?? '')}</p>
+      </div>
+      <figure class="featured-visual">
+        <div class="featured-main-frame">
+          <img src="${escapeHtml(feature.mainImage)}" alt="${escapeHtml(feature.mainLabel[currentLanguage])}" loading="lazy" decoding="async" width="${project.id === 'autoprofi' ? 570 : 1280}" height="${project.id === 'autoprofi' ? 860 : 720}" />
+          <span class="featured-frame-label" aria-hidden="true">${escapeHtml(feature.mainLabel[currentLanguage])}</span>
+        </div>
+        <div class="featured-result-frame">
+          <img src="${escapeHtml(feature.resultImage)}" alt="${escapeHtml(feature.resultLabel[currentLanguage])}" loading="lazy" decoding="async" width="${project.id === 'autoprofi' ? 530 : project.id === 'quote' ? 1000 : 960}" height="${project.id === 'autoprofi' ? 245 : project.id === 'quote' ? 588 : 650}" />
+          <span class="featured-frame-label" aria-hidden="true">${escapeHtml(feature.resultLabel[currentLanguage])}</span>
+        </div>
+      </figure>
+      <div class="featured-detail">
+        <dl class="featured-facts">
+          <div><dt>${roleLabel}</dt><dd>${escapeHtml(feature.role[currentLanguage])}</dd></div>
+          <div><dt>${resultLabel}</dt><dd>${escapeHtml(feature.result[currentLanguage])}</dd></div>
+        </dl>
+        <div class="featured-meta">
+          <span>${escapeHtml(feature.status[currentLanguage])}</span>
+          <span>${escapeHtml(feature.meta[currentLanguage])}</span>
+        </div>
+        <div class="featured-action">${demoButton(project)}<span class="demo-duration" aria-label="${currentLanguage === 'ru' ? 'Длительность видео' : 'Video duration'}">${project.duration}</span></div>
       </div>
     </article>`
 }
+
+const secondaryProject = (project: Project): string => `
+  <article class="secondary-project" id="${project.id}">
+    <img src="${escapeHtml(project.cover ?? '')}" alt="" loading="lazy" decoding="async" width="960" height="540" />
+    <div class="secondary-project-copy">
+      <h4>${escapeHtml(project.name)}</h4>
+      <p>${escapeHtml(project.summary?.[currentLanguage] ?? '')}</p>
+      ${demoButton(project)}
+    </div>
+  </article>`
+
+const creativeProject = (project: Project): string => `
+  <article class="creative-project" id="${project.id}">
+    <img src="${escapeHtml(project.cover ?? '')}" alt="" loading="lazy" decoding="async" width="1200" height="600" />
+    <div>
+      <p class="project-number">${escapeHtml(project.type[currentLanguage])}</p>
+      <h4>${escapeHtml(project.name)}</h4>
+      <p>${escapeHtml(project.description?.[currentLanguage] ?? '')}</p>
+    </div>
+  </article>`
 
 // Glue short Russian words to the following word, including generated cards.
 // Walk text nodes only: attributes, URLs, project data and English stay intact.
@@ -48,16 +86,13 @@ const applyRussianTypography = (): void => {
 }
 
 const renderProjects = (): void => {
-  const groups: Array<[string, Project[]]> = [
-    ['ai-projects', aiProjects],
-    ['web-projects', webProjects],
-    ['creative-projects', creativeProjects],
-  ]
-
-  groups.forEach(([id, projects]) => {
-    const container = document.getElementById(id)
-    if (container) container.innerHTML = projects.map(projectCard).join('')
-  })
+  const ordered = (ids: string[]): Project[] => ids.flatMap((id) => aiProjects.filter((project) => project.id === id))
+  const featured = document.getElementById('featured-projects')
+  const secondary = document.getElementById('secondary-projects')
+  const creative = document.getElementById('creative-projects')
+  if (featured) featured.innerHTML = ordered(['autoprofi', 'quote', 'roadmap']).map(featuredCase).join('')
+  if (secondary) secondary.innerHTML = ordered(['yandex-mail', 'page', 'sorter']).map(secondaryProject).join('')
+  if (creative) creative.innerHTML = creativeProjects.map(creativeProject).join('')
   applyRussianTypography()
 }
 

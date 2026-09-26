@@ -5,6 +5,12 @@ import mailCover from '../Video/posters/yandex-mail.webp'
 import quoteCover from '../Video/posters/quote.webp'
 import sorterCover from '../Video/posters/sorter.webp'
 import pageCover from '../Video/posters/page.webp'
+import autoConversation from '../Video/frames/autoprofi-conversation.webp'
+import autoBooking from '../Video/frames/autoprofi-booking.webp'
+import quoteEstimate from '../Video/frames/quote-estimate.webp'
+import quoteProposal from '../Video/frames/quote-proposal.webp'
+import roadmapInterview from '../Video/frames/roadmap-interview.webp'
+import roadmapPlan from '../Video/frames/roadmap-plan.webp'
 import autoVideo from '../Video/AutoProfi_Voice_Agent_GR.mp4?url'
 import mailVideo from '../Video/Yandex_Mail_Agent_PRIVATE_GR.mp4?url'
 import quoteVideo from '../Video/AI_Quote_Assistant_GR.mp4?url'
@@ -14,6 +20,17 @@ import pageVideo from '../Video/AI_Page_Assistant_GR.mp4?url'
 
 export type Language = 'ru' | 'en'
 type LocalizedText = Record<Language, string>
+type FeaturedContent = {
+  heading: LocalizedText
+  role: LocalizedText
+  result: LocalizedText
+  status: LocalizedText
+  meta: LocalizedText
+  mainImage: string
+  resultImage: string
+  mainLabel: LocalizedText
+  resultLabel: LocalizedText
+}
 export type Project = {
   id: string
   name: string
@@ -26,6 +43,8 @@ export type Project = {
   duration?: string
   portrait?: boolean
   status?: LocalizedText
+  summary?: LocalizedText
+  feature?: FeaturedContent
 }
 
 // Evidence: supplied brief and demonstration frames. Do not infer backend stacks
@@ -35,22 +54,54 @@ export const aiProjects: Project[] = [
     id: 'autoprofi', name: 'AutoProfi Voice Agent', kind: 'primary',
     type: { ru: 'Голосовой AI-агент', en: 'Voice AI agent' },
     description: {
-      ru: 'Голосовой ассистент для автосервиса: общается с клиентом и помогает пройти сценарий записи. Рабочий прототип показывает, как автоматизировать первичный диалог с посетителем.',
-      en: 'A voice assistant for an auto service business. It talks with a customer and guides them through a booking scenario. This working prototype demonstrates an automated first conversation.',
+      ru: 'Помогает автоматизировать типовой разговор с клиентом: уточняет запрос, собирает нужные данные и проводит человека до оформления записи.',
+      en: 'Automates a typical customer conversation: clarifies the request, collects the necessary details, and guides the customer through the booking process.',
     },
     cover: autoCover, video: autoVideo, duration: '2:20', portrait: true,
     status: { ru: 'Рабочий прототип · бизнес-сценарий', en: 'Working prototype · business use case' },
+    feature: {
+      heading: { ru: 'Голосовой AI-агент для записи в автосервис', en: 'AI voice agent for auto service bookings' },
+      role: {
+        ru: 'Продумала, как агент должен общаться с клиентом, какие данные собирать и как доводить разговор до записи, затем собрала рабочую демонстрационную версию.',
+        en: 'I designed how the agent communicates with customers, what information it collects, and how the conversation leads to a booking, then built a working demo version.',
+      },
+      result: {
+        ru: 'В демо агент самостоятельно проходит сценарий разговора и завершает его созданием записи.',
+        en: 'In the demo, the agent completes the conversation flow and finishes by creating a booking.',
+      },
+      status: { ru: 'Рабочий демонстрационный прототип', en: 'Working demo prototype' },
+      meta: { ru: 'Voice AI · React / Vite · Node.js · SQLite', en: 'Voice AI · React / Vite · Node.js · SQLite' },
+      mainImage: autoConversation, resultImage: autoBooking,
+      mainLabel: { ru: 'Агент отвечает клиенту', en: 'The agent responds to the customer' },
+      resultLabel: { ru: 'Запись создана', en: 'Booking created' },
+    },
   },
   {
     id: 'roadmap', name: 'AI Roadmap Generator', kind: 'primary',
     type: { ru: 'Голосовое интервью → план действий', en: 'Voice interview → action plan' },
     description: {
-      ru: 'Помогает перейти от идеи к конкретным шагам. Агент проводит голосовое интервью в три раунда, анализирует ответы и формирует персональный пошаговый план действий.',
-      en: 'Helps turn an idea into concrete next steps. The agent runs a three-round voice interview, analyzes the answers and builds a personalized action plan.',
+      ru: 'Помогает человеку разобраться с идеей или задачей: задаёт вопросы, собирает ответы голосом и превращает их в структурированный план дальнейших действий.',
+      en: 'Helps a person structure an idea or task through a short voice interview and turns the answers into a clear action plan.',
     },
     // Stack shown on the existing portfolio demo cover and in the original data.
     tags: ['Next.js', 'Cloudflare Workers', 'NanoGPT', 'Groq Whisper'],
     cover: roadmapCover, video: roadmapVideo, duration: '1:30',
+    feature: {
+      heading: { ru: 'Голосовое интервью превращается в пошаговый план', en: 'A voice interview becomes a step-by-step plan' },
+      role: {
+        ru: 'Продумала структуру интервью, логику вопросов и то, как ответы превращаются в последовательный план действий, затем собрала рабочий прототип.',
+        en: 'I designed the interview structure, question flow, and the logic for turning answers into a sequence of actionable steps, then built a working prototype.',
+      },
+      result: {
+        ru: 'Пользователь проходит три этапа голосового интервью и получает персонализированный roadmap с конкретными следующими шагами.',
+        en: 'The user completes three stages of a voice interview and receives a personalized roadmap with clear next steps.',
+      },
+      status: { ru: 'Рабочий демонстрационный прототип', en: 'Working demo prototype' },
+      meta: { ru: 'Next.js · Cloudflare Workers · Groq Whisper · AI', en: 'Next.js · Cloudflare Workers · Groq Whisper · AI' },
+      mainImage: roadmapInterview, resultImage: roadmapPlan,
+      mainLabel: { ru: 'Голосовое интервью', en: 'Voice interview' },
+      resultLabel: { ru: 'Готовый план', en: 'Completed roadmap' },
+    },
   },
   {
     id: 'yandex-mail', name: 'Yandex Mail Agent', kind: 'primary',
@@ -61,15 +112,32 @@ export const aiProjects: Project[] = [
     },
     cover: mailCover, video: mailVideo, duration: '1:00',
     status: { ru: 'Работающий сценарий · видеодемонстрация', en: 'Working workflow · video walkthrough' },
+    summary: { ru: 'Показывает и создаёт папки Яндекс Почты по команде из Telegram.', en: 'Lists and creates Yandex Mail folders through Telegram commands.' },
   },
   {
     id: 'quote', name: 'AI Quote Assistant', kind: 'primary',
     type: { ru: 'Бизнес-инструмент', en: 'Business tool' },
     description: {
-      ru: 'Помогает превратить заявку клиента в коммерческое предложение. В демо — ввод задачи, оценка стоимости и сроков, затем подготовка предложения с составом работ.',
-      en: 'Turns a client request into a project proposal. The demo follows the process from a brief to a cost and timeline estimate, then a proposal outlining the work.',
+      ru: 'Помогает превратить необработанную заявку в понятную структуру: выделяет задачу и нужные услуги, находит недостающие данные, помогает рассчитать предложение и подготовить его черновик.',
+      en: 'Turns an unstructured client request into a clear workflow: identifies the task and required services, finds missing information, helps calculate the estimate, and prepares a draft proposal.',
     },
     cover: quoteCover, video: quoteVideo, duration: '0:51',
+    feature: {
+      heading: { ru: 'От заявки клиента до черновика коммерческого предложения', en: 'From a client request to a draft proposal' },
+      role: {
+        ru: 'Продумала, как превратить клиентскую заявку в понятный рабочий процесс — разобрать запрос, определить нужные услуги и недостающие данные, рассчитать предложение и подготовить черновик коммерческого предложения, затем собрала рабочий прототип.',
+        en: 'I designed the workflow for turning a client request into a structured process — analysing the request, identifying services and missing information, calculating the proposal, and preparing a draft commercial offer — then built a working prototype.',
+      },
+      result: {
+        ru: 'В демо показан полный путь от исходной заявки до расчёта и подготовленного предложения.',
+        en: 'The demo shows the complete flow from the original request to the estimate and prepared proposal.',
+      },
+      status: { ru: 'Демонстрационный прототип', en: 'Demo prototype' },
+      meta: { ru: 'AI · Обработка заявок · Автоматизация предложений', en: 'AI · Request analysis · Proposal automation' },
+      mainImage: quoteEstimate, resultImage: quoteProposal,
+      mainLabel: { ru: 'Расчёт и проверка', en: 'Estimate and review' },
+      resultLabel: { ru: 'Черновик предложения', en: 'Draft proposal' },
+    },
   },
   {
     id: 'sorter', name: 'Smart Downloads Sorter', kind: 'secondary',
@@ -79,6 +147,7 @@ export const aiProjects: Project[] = [
       en: 'Organizes downloads without sorting every file by hand. It previews a folder plan before applying it, turning a cluttered folder into an organized file structure.',
     },
     cover: sorterCover, video: sorterVideo, duration: '0:41',
+    summary: { ru: 'Предлагает план сортировки загрузок перед применением.', en: 'Previews a plan for organizing downloads before applying it.' },
   },
   {
     id: 'page', name: 'AI Page Assistant', kind: 'secondary',
@@ -88,6 +157,7 @@ export const aiProjects: Project[] = [
       en: 'Helps make sense of the page you are reading. Ask questions about its content in the browser sidebar and listen to answers with text-to-speech.',
     },
     cover: pageCover, video: pageVideo, duration: '0:57',
+    summary: { ru: 'Отвечает на вопросы по открытой странице в боковой панели.', en: 'Answers questions about the open page in a browser sidebar.' },
   },
 ]
 
