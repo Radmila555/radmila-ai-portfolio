@@ -1051,6 +1051,28 @@ section[id], main[id], .project-group h3[id] {
   z-index: 2;
 }
 
+.contact-secondary {
+  position: absolute;
+  bottom: clamp(8px, 1vw, 14px);
+  left: clamp(24px, 4vw, 56px);
+  z-index: 2;
+  display: flex;
+  width: fit-content;
+  color: var(--muted-strong);
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 180ms ease;
+}
+
+.contact-secondary:hover,
+.contact-secondary:focus-visible {
+  color: var(--cyan);
+}
+
+html[lang="en"] .contact-secondary {
+  display: none;
+}
+
 .site-footer {
   display: grid;
   grid-template-columns: 1fr auto 1fr;

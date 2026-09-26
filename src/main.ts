@@ -203,6 +203,19 @@ demoDialog.addEventListener('close', () => {
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
+const contactSection = document.getElementById('contact')
+document.querySelectorAll<HTMLAnchorElement>('a[href="#contact"]').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    if (!contactSection) return
+    event.preventDefault()
+    contactSection.scrollIntoView({
+      behavior: reducedMotion.matches ? 'auto' : 'smooth',
+      block: 'start',
+    })
+    if (window.location.hash !== '#contact') window.history.pushState(null, '', '#contact')
+  })
+})
+
 // Run only at boot. The real heading text stays in place and readable throughout.
 const startHeroEntrance = (): void => {
   if (reducedMotion.matches) return
