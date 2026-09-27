@@ -241,6 +241,10 @@ section[id], main[id], .project-group h3[id] {
   transform: scaleX(1);
 }
 
+.main-nav .mobile-nav-contact {
+  display: none;
+}
+
 .header-actions {
   display: flex;
   align-items: center;
@@ -1485,6 +1489,10 @@ body.demo-open { overflow: hidden; }
   .main-nav a {
     padding: 13px 4px;
     border-bottom: 1px solid rgba(127, 155, 220, 0.1);
+  }
+
+  .main-nav .mobile-nav-contact {
+    display: inline-flex;
   }
 
   .main-nav a::after {
