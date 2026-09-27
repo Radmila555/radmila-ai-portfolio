@@ -6,6 +6,12 @@ coverage/
 
 # Keep demonstration videos and personal planning outside version control.
 *.[mM][pP]4
+!Video/AutoProfi_Voice_Agent_GR.mp4
+!Video/Yandex_Mail_Agent_PRIVATE_GR.mp4
+!Video/AI_Quote_Assistant_GR.mp4
+!Video/Smart_Downloads_Sorter_CLEAN_GR.mp4
+!Video/AI_Roadmap_Generator_WEB_GR.mp4
+!Video/AI_Page_Assistant_GR.mp4
 roadmap-c604e681-1e0c-4d51-9612-52ef1ae38557.md
 
 # Local environment files can contain credentials.

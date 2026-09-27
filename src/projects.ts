@@ -15,7 +15,7 @@ import autoVideo from '../Video/AutoProfi_Voice_Agent_GR.mp4?url'
 import mailVideo from '../Video/Yandex_Mail_Agent_PRIVATE_GR.mp4?url'
 import quoteVideo from '../Video/AI_Quote_Assistant_GR.mp4?url'
 import sorterVideo from '../Video/Smart_Downloads_Sorter_CLEAN_GR.mp4?url'
-import roadmapVideo from '../Video/AI_Roadmap_Generator_FINAL_GR.mp4?url'
+import roadmapVideo from '../Video/AI_Roadmap_Generator_WEB_GR.mp4?url'
 import pageVideo from '../Video/AI_Page_Assistant_GR.mp4?url'
 
 export type Language = 'ru' | 'en'
