@@ -279,6 +279,61 @@ section[id], main[id], .project-group h3[id] {
   content: "";
 }
 
+.text-size-toggle {
+  display: inline-flex;
+  min-width: 62px;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  border: 1px solid rgba(127, 155, 220, 0.24);
+  border-radius: 999px;
+  background: rgba(15, 25, 50, 0.38);
+  color: #8f9ab8;
+  cursor: pointer;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.text-size-state {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+}
+
+.text-size-state span {
+  color: #8f9ab8;
+  transition: color 180ms ease;
+}
+
+.text-size-state span:last-child {
+  font-size: 13px;
+}
+
+.text-size-state span.active {
+  color: var(--text);
+}
+
+.text-size-toggle:hover,
+.text-size-toggle:focus-visible,
+.text-size-mobile:hover,
+.text-size-mobile:focus-visible {
+  border-color: rgba(77, 180, 255, 0.62);
+  background: rgba(41, 71, 132, 0.25);
+}
+
+.text-size-toggle:focus-visible,
+.text-size-mobile:focus-visible {
+  outline: 2px solid rgba(38, 209, 255, 0.72);
+  outline-offset: 3px;
+}
+
+.text-size-mobile {
+  display: none;
+}
+
 .header-contact {
   display: inline-flex;
   align-items: center;
@@ -1445,6 +1500,27 @@ body.demo-open { overflow: hidden; }
     margin-right: 10px;
   }
 
+  .text-size-toggle {
+    display: none;
+  }
+
+  .text-size-mobile {
+    display: flex;
+    width: 100%;
+    min-height: 48px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 4px;
+    border: 0;
+    border-bottom: 1px solid rgba(127, 155, 220, 0.1);
+    background: transparent;
+    color: var(--muted-strong);
+    font: inherit;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+  }
+
   .hero {
     --hero-text-w: 720px;
 
@@ -1912,8 +1988,8 @@ body.demo-open { overflow: hidden; }
 .featured-facts dd {
   margin: 5px 0 0;
   color: var(--muted);
-  font-size: 14px;
-  line-height: 1.55;
+  font-size: 16px;
+  line-height: 1.58;
 }
 
 .featured-facts > div:last-child dd {
@@ -1925,8 +2001,37 @@ body.demo-open { overflow: hidden; }
   gap: 3px;
   margin-top: 19px;
   color: #a8b4d0;
-  font-size: 12px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.featured-credit {
+  max-width: 530px;
+  margin: 12px 0 0;
+  color: #a7b2ce;
+  font-size: 15px;
+  line-height: 1.56;
+}
+
+.featured-credit a {
+  color: #c9d7f4;
+  text-decoration-color: rgba(201, 215, 244, 0.48);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 180ms ease, text-decoration-color 180ms ease;
+}
+
+.featured-credit a:hover {
+  color: var(--cyan);
+  text-decoration-color: currentColor;
+}
+
+.featured-credit a:focus-visible {
+  border-radius: 3px;
+  outline: 2px solid rgba(38, 209, 255, 0.7);
+  outline-offset: 3px;
+  color: #dff9ff;
+  text-decoration-color: var(--cyan);
 }
 
 .featured-action {
@@ -2165,7 +2270,7 @@ body.demo-open { overflow: hidden; }
     height: 93px;
   }
   .featured-frame-label { font-size: 10px; }
-  .featured-facts dd { font-size: 14px; }
+  .featured-facts dd { font-size: 16px; }
   .secondary-projects { grid-template-columns: minmax(0, 1fr); }
   .secondary-project {
     grid-template-columns: 88px minmax(0, 1fr);
@@ -2178,4 +2283,75 @@ body.demo-open { overflow: hidden; }
   .secondary-project > img { width: 88px; height: 88px; }
   .creative-project { grid-template-columns: minmax(0, 1fr); }
   .creative-project img { max-height: 190px; }
+}
+
+/* Readable-text preference. It deliberately leaves display headings, labels,
+   controls, artwork and the layout grid at their original scale. */
+html[data-text-size="large"] .hero-lead {
+  font-size: clamp(18.5px, 1.38vw, 21px);
+}
+
+html[data-text-size="large"] .section-heading > p {
+  font-size: 19.5px;
+  line-height: 1.58;
+}
+
+html[data-text-size="large"] .featured-description,
+html[data-text-size="large"] .featured-facts dd,
+html[data-text-size="large"] .service-description {
+  font-size: 18.5px;
+}
+
+html[data-text-size="large"] .featured-description,
+html[data-text-size="large"] .service-description {
+  line-height: 1.58;
+}
+
+html[data-text-size="large"] .featured-facts dd {
+  line-height: 1.56;
+}
+
+html[data-text-size="large"] .featured-meta {
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+html[data-text-size="large"] .featured-credit {
+  font-size: 17.5px;
+  line-height: 1.55;
+}
+
+html[data-text-size="large"] .secondary-project p {
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+html[data-text-size="large"] .creative-project p:last-child {
+  font-size: 17.25px;
+  line-height: 1.56;
+}
+
+html[data-text-size="large"] .about-copy {
+  font-size: 19.5px;
+  line-height: 1.58;
+}
+
+html[data-text-size="large"] .about-lead {
+  font-size: clamp(29px, 2.75vw, 39px);
+  line-height: 1.38;
+}
+
+html[data-text-size="large"] .contact-panel > p:not(.section-index) {
+  font-size: 21px;
+  line-height: 1.58;
+}
+
+@media (max-width: 620px) {
+  html[data-text-size="large"] .featured-description {
+    font-size: 17.5px;
+  }
+
+  html[data-text-size="large"] .contact-panel > p:not(.section-index) {
+    font-size: 18.5px;
+  }
 }

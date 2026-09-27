@@ -30,6 +30,12 @@ type FeaturedContent = {
   resultImage: string
   mainLabel: LocalizedText
   resultLabel: LocalizedText
+  credit?: {
+    prefix: LocalizedText
+    linkLabel: LocalizedText
+    suffix: LocalizedText
+    url: string
+  }
 }
 export type Project = {
   id: string
@@ -101,6 +107,15 @@ export const aiProjects: Project[] = [
       mainImage: roadmapInterview, resultImage: roadmapPlan,
       mainLabel: { ru: 'Голосовое интервью', en: 'Voice interview' },
       resultLabel: { ru: 'Готовый план', en: 'Completed roadmap' },
+      credit: {
+        prefix: { ru: 'Проект создан в рамках курса ', en: 'Created as part of the ' },
+        linkLabel: {
+          ru: 'Profile School «Разработка с AI: автоматизация и продуктивность»',
+          en: 'Profile School course “Developing with AI: Automation and Productivity”',
+        },
+        suffix: { ru: '. Преподаватель — Александр Свет.', en: '. Instructor — Alexander Svet.' },
+        url: 'https://www.profileschool.ru/category/ai/course_developing_with_ai_automation_and_productivity',
+      },
     },
   },
   {

@@ -3,6 +3,45 @@ import { aiProjects, creativeProjects, type Language, type Project } from './pro
 
 let currentLanguage: Language = 'ru'
 let stopHeroEntrance = (): void => {}
+type TextSize = 'normal' | 'large'
+
+const textSizeStorageKey = 'portfolio-text-size'
+const readTextSize = (): TextSize => {
+  try {
+    return window.localStorage.getItem(textSizeStorageKey) === 'large' ? 'large' : 'normal'
+  } catch {
+    return 'normal'
+  }
+}
+
+let currentTextSize: TextSize = readTextSize()
+document.documentElement.dataset.textSize = currentTextSize
+
+const updateTextSizeControls = (): void => {
+  const isLarge = currentTextSize === 'large'
+  const stateLabel = currentLanguage === 'ru'
+    ? `Крупнее текст: ${isLarge ? 'включено' : 'выключено'}`
+    : `Larger text: ${isLarge ? 'on' : 'off'}`
+
+  document.querySelectorAll<HTMLButtonElement>('[data-text-size-toggle]').forEach((button) => {
+    button.setAttribute('aria-pressed', String(isLarge))
+    button.setAttribute('aria-label', stateLabel)
+    button.querySelectorAll<HTMLElement>('.text-size-state span').forEach((option, index) => {
+      option.classList.toggle('active', isLarge ? index === 1 : index === 0)
+    })
+  })
+}
+
+const setTextSize = (textSize: TextSize): void => {
+  currentTextSize = textSize
+  document.documentElement.dataset.textSize = textSize
+  try {
+    window.localStorage.setItem(textSizeStorageKey, textSize)
+  } catch {
+    // The visual setting still works when storage is unavailable.
+  }
+  updateTextSizeControls()
+}
 
 const escapeHtml = (value: string): string =>
   value.replace(/[&<>'"]/g, (character) => {
@@ -21,6 +60,9 @@ const featuredCase = (project: Project, index: number): string => {
   const feature = project.feature!
   const roleLabel = currentLanguage === 'ru' ? 'Моя роль' : 'My role'
   const resultLabel = currentLanguage === 'ru' ? 'Результат' : 'Result'
+  const credit = feature.credit
+    ? `<p class="featured-credit">${escapeHtml(feature.credit.prefix[currentLanguage])}<a href="${escapeHtml(feature.credit.url)}" target="_blank" rel="noreferrer">${escapeHtml(feature.credit.linkLabel[currentLanguage])}</a>${escapeHtml(feature.credit.suffix[currentLanguage])}</p>`
+    : ''
   return `
     <article class="featured-case ${index === 1 ? 'featured-case-reverse' : ''} featured-case-${project.id}" id="${project.id}">
       <div class="featured-intro">
@@ -47,6 +89,7 @@ const featuredCase = (project: Project, index: number): string => {
           <span>${escapeHtml(feature.status[currentLanguage])}</span>
           <span>${escapeHtml(feature.meta[currentLanguage])}</span>
         </div>
+        ${credit}
         <div class="featured-action">${demoButton(project)}<span class="demo-duration" aria-label="${currentLanguage === 'ru' ? 'Длительность видео' : 'Video duration'}">${project.duration}</span></div>
       </div>
     </article>`
@@ -113,6 +156,8 @@ const updateLanguage = (language: Language): void => {
     label.classList.toggle('active', label.textContent?.toLowerCase() === language)
   })
 
+  updateTextSizeControls()
+
   document.querySelector('meta[name="description"]')?.setAttribute('content', language === 'ru' ? 'Radmila G. — AI-агенты, автоматизация и веб-решения. Работающие проекты и видеодемонстрации.' : 'Radmila G. — AI agents, automation and web tools. Working projects and video demos.')
   renderProjects()
   updateMenuLabel()
@@ -122,6 +167,12 @@ const updateLanguage = (language: Language): void => {
 const languageSwitch = document.querySelector<HTMLButtonElement>('[data-language-switch]')
 languageSwitch?.addEventListener('click', () => {
   updateLanguage(currentLanguage === 'ru' ? 'en' : 'ru')
+})
+
+document.querySelectorAll<HTMLButtonElement>('[data-text-size-toggle]').forEach((button) => {
+  button.addEventListener('click', () => {
+    setTextSize(currentTextSize === 'large' ? 'normal' : 'large')
+  })
 })
 
 const menuToggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]')
