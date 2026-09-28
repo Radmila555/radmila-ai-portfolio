@@ -2237,10 +2237,6 @@ body.demo-open { overflow: hidden; }
   align-items: start;
 }
 
-.art-education-projects .creative-project:nth-child(even) {
-  margin-top: clamp(34px, 5vw, 74px);
-}
-
 .art-education-projects .creative-project:only-child {
   grid-column: 1 / -1;
   grid-template-columns: minmax(0, 0.46fr) minmax(0, 1fr);
@@ -2250,6 +2246,7 @@ body.demo-open { overflow: hidden; }
 
 .creative-project img {
   width: 100%;
+  height: auto;
   aspect-ratio: 16 / 10;
   border-radius: 12px;
   object-fit: cover;
@@ -2355,6 +2352,9 @@ body.demo-open { overflow: hidden; }
   .art-education-projects .creative-project:only-child {
     grid-column: auto;
     grid-template-columns: minmax(0, 1fr);
+    margin-top: 0;
+  }
+  .art-education-projects .creative-project:nth-child(even) {
     margin-top: 0;
   }
   .creative-project img,

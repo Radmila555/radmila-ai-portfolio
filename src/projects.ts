@@ -6,6 +6,7 @@ import quoteCover from '../Video/posters/quote.webp'
 import sorterCover from '../Video/posters/sorter.webp'
 import pageCover from '../Video/posters/page.webp'
 import nexoraPreview from './assets/web-projects/nexora-preview.webp'
+import artCloseupCover from './assets/art-education/artcloseup-preview.webp'
 import autoConversation from '../Video/frames/autoprofi-conversation.webp'
 import autoBooking from '../Video/frames/autoprofi-booking.webp'
 import quoteEstimate from '../Video/frames/quote-estimate.webp'
@@ -41,6 +42,7 @@ type FeaturedContent = {
 export type Project = {
   id: string
   name: string
+  title?: LocalizedText
   kind: 'primary' | 'secondary' | 'creative' | 'web'
   type: LocalizedText
   description?: LocalizedText
@@ -184,7 +186,18 @@ export const aiProjects: Project[] = [
 export const artEducationProjects: Project[] = [
   {
     id: 'artcloseup', name: 'ArtCloseup', kind: 'creative',
+    title: { ru: 'Искусство крупным планом', en: 'ArtCloseup' },
     type: { ru: 'Авторский сайт по истории искусства', en: 'Independent art history website' },
+    description: {
+      ru: 'Авторский образовательный сайт по истории искусства. Статьи, презентации и интерактивные игры помогают внимательнее смотреть на произведения, замечать детали и понимать замысел художника.',
+      en: 'An independent educational website about art history. Articles, presentations and interactive games encourage closer looking, attention to detail and a clearer understanding of artistic intent.',
+    },
+    cover: artCloseupCover,
+    previewAlt: {
+      ru: 'Главная страница проекта «Искусство крупным планом» с гравюрой «Большая волна в Канагаве»',
+      en: 'ArtCloseup homepage featuring The Great Wave off Kanagawa',
+    },
+    liveUrl: 'https://radmila555-artcloseup-090d.twc1.net/',
     liveKind: 'site',
   },
   {

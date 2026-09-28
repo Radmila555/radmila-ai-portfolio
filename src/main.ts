@@ -107,19 +107,20 @@ const secondaryProject = (project: Project): string => `
 
 const creativeProject = (project: Project): string => {
   const isWebsite = project.liveKind === 'site'
+  const title = project.title?.[currentLanguage] ?? project.name
   const liveLabel = currentLanguage === 'ru'
     ? (isWebsite ? 'Открыть сайт' : 'Открыть игру')
     : (isWebsite ? 'Open site' : 'Open game')
   const action = project.liveUrl
-    ? `<a class="button button-primary" href="${escapeHtml(project.liveUrl)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(`${liveLabel} — ${project.name}`)}">${liveLabel}</a>`
+    ? `<a class="button button-primary" href="${escapeHtml(project.liveUrl)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(`${liveLabel} — ${title}`)}">${liveLabel}</a>`
     : ''
 
   return `
     <article class="creative-project" id="${project.id}">
-      <img src="${escapeHtml(project.cover ?? '')}" alt="" loading="lazy" decoding="async" width="1200" height="600" />
+      <img src="${escapeHtml(project.cover ?? '')}" alt="${escapeHtml(project.previewAlt?.[currentLanguage] ?? '')}" loading="lazy" decoding="async" width="${project.id === 'art-detective' ? '1200' : '1440'}" height="${project.id === 'art-detective' ? '600' : '900'}" />
       <div>
         <p class="project-number">${escapeHtml(project.type[currentLanguage])}</p>
-        <h4>${escapeHtml(project.name)}</h4>
+        <h4>${escapeHtml(title)}</h4>
         <p class="creative-description">${escapeHtml(project.description?.[currentLanguage] ?? '')}</p>
         <div class="creative-actions">${action}</div>
       </div>
