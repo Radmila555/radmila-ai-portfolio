@@ -105,15 +105,23 @@ const secondaryProject = (project: Project): string => `
     </div>
   </article>`
 
-const creativeProject = (project: Project): string => `
-  <article class="creative-project" id="${project.id}">
-    <img src="${escapeHtml(project.cover ?? '')}" alt="" loading="lazy" decoding="async" width="1200" height="600" />
-    <div>
-      <p class="project-number">${escapeHtml(project.type[currentLanguage])}</p>
-      <h4>${escapeHtml(project.name)}</h4>
-      <p>${escapeHtml(project.description?.[currentLanguage] ?? '')}</p>
-    </div>
-  </article>`
+const creativeProject = (project: Project): string => {
+  const liveLabel = currentLanguage === 'ru' ? 'Открыть игру' : 'Open game'
+  const action = project.liveUrl
+    ? `<a class="button button-primary" href="${escapeHtml(project.liveUrl)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(`${liveLabel} — ${project.name}`)}">${liveLabel}</a>`
+    : ''
+
+  return `
+    <article class="creative-project" id="${project.id}">
+      <img src="${escapeHtml(project.cover ?? '')}" alt="" loading="lazy" decoding="async" width="1200" height="600" />
+      <div>
+        <p class="project-number">${escapeHtml(project.type[currentLanguage])}</p>
+        <h4>${escapeHtml(project.name)}</h4>
+        <p class="creative-description">${escapeHtml(project.description?.[currentLanguage] ?? '')}</p>
+        <div class="creative-actions">${action}</div>
+      </div>
+    </article>`
+}
 
 // Glue short Russian words to the following word, including generated cards.
 // Walk text nodes only: attributes, URLs, project data and English stay intact.

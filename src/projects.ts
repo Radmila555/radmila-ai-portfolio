@@ -51,6 +51,7 @@ export type Project = {
   status?: LocalizedText
   summary?: LocalizedText
   feature?: FeaturedContent
+  liveUrl?: string
 }
 
 // Evidence: supplied brief and demonstration frames. Do not infer backend stacks
@@ -184,6 +185,7 @@ export const creativeProjects: Project[] = [{
     en: 'A creative learning project combining art, AI and web technology. An exploration of AI in an artistic and educational setting.',
   },
   cover: artCover,
+  liveUrl: 'https://Radmila555.github.io/art-detective/',
 }]
 
 // TODO: add verified URLs, screenshots, stacks and project briefs when supplied.
