@@ -6,6 +6,7 @@ import quoteCover from '../Video/posters/quote.webp'
 import sorterCover from '../Video/posters/sorter.webp'
 import pageCover from '../Video/posters/page.webp'
 import nexoraPreview from './assets/web-projects/nexora-preview.webp'
+import nordenPreview from './assets/web-projects/norden-preview.webp'
 import artCloseupCover from './assets/art-education/artcloseup-preview.webp'
 import autoConversation from '../Video/frames/autoprofi-conversation.webp'
 import autoBooking from '../Video/frames/autoprofi-booking.webp'
@@ -236,8 +237,25 @@ export const webProjects: Project[] = [
     liveKind: 'demo',
   },
   {
-    id: 'norden', name: 'NORDEN', kind: 'web',
+    id: 'norden', name: 'NORDEN HOME', kind: 'web',
     type: { ru: 'Веб-проект', en: 'Web project' },
+    description: {
+      ru: 'Демонстрационный full-stack сервис подбора недвижимости: каталог с картой, умный подбор, избранное, ипотечный калькулятор и админ-панель.',
+      en: 'A full-stack real-estate discovery demo with a map-based catalog, smart matching, favorites, mortgage calculator, and admin dashboard.',
+    },
+    localizedTags: [
+      { ru: 'React', en: 'React' },
+      { ru: 'Express', en: 'Express' },
+      { ru: 'SQLite', en: 'SQLite' },
+      { ru: 'Leaflet', en: 'Leaflet' },
+    ],
+    cover: nordenPreview,
+    previewAlt: {
+      ru: 'Главная страница демонстрационного сервиса недвижимости NORDEN HOME',
+      en: 'NORDEN HOME real-estate demo homepage',
+    },
+    liveUrl: 'https://norden-home.onrender.com/',
+    liveKind: 'demo',
   },
   {
     id: 'mira', name: 'MIRA', kind: 'web',
