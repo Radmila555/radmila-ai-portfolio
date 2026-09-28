@@ -5,6 +5,7 @@ import mailCover from '../Video/posters/yandex-mail.webp'
 import quoteCover from '../Video/posters/quote.webp'
 import sorterCover from '../Video/posters/sorter.webp'
 import pageCover from '../Video/posters/page.webp'
+import nexoraPreview from './assets/web-projects/nexora-preview.webp'
 import autoConversation from '../Video/frames/autoprofi-conversation.webp'
 import autoBooking from '../Video/frames/autoprofi-booking.webp'
 import quoteEstimate from '../Video/frames/quote-estimate.webp'
@@ -52,6 +53,9 @@ export type Project = {
   summary?: LocalizedText
   feature?: FeaturedContent
   liveUrl?: string
+  liveKind?: 'site' | 'demo'
+  localizedTags?: LocalizedText[]
+  previewAlt?: LocalizedText
 }
 
 // Evidence: supplied brief and demonstration frames. Do not infer backend stacks
@@ -177,20 +181,61 @@ export const aiProjects: Project[] = [
   },
 ]
 
-export const creativeProjects: Project[] = [{
-  id: 'art-detective', name: 'Art Detective', kind: 'creative',
-  type: { ru: 'AI · искусство и образование', en: 'AI · art and education' },
-  description: {
-    ru: 'Творческий образовательный проект на пересечении искусства, AI и веб-технологий. Пример применения AI в художественном и учебном контексте.',
-    en: 'A creative learning project combining art, AI and web technology. An exploration of AI in an artistic and educational setting.',
+export const artEducationProjects: Project[] = [
+  {
+    id: 'artcloseup', name: 'ArtCloseup', kind: 'creative',
+    type: { ru: 'Авторский сайт по истории искусства', en: 'Independent art history website' },
+    liveKind: 'site',
   },
-  cover: artCover,
-  liveUrl: 'https://Radmila555.github.io/art-detective/',
-}]
+  {
+    id: 'art-detective', name: 'Art Detective', kind: 'creative',
+    type: { ru: 'AI · искусство и образование', en: 'AI · art and education' },
+    description: {
+      ru: 'Творческий образовательный проект на пересечении искусства, AI и веб-технологий. Пример применения AI в художественном и учебном контексте.',
+      en: 'A creative learning project combining art, AI and web technology. An exploration of AI in an artistic and educational setting.',
+    },
+    cover: artCover,
+    liveUrl: 'https://Radmila555.github.io/art-detective/',
+  },
+]
 
-// TODO: add verified URLs, screenshots, stacks and project briefs when supplied.
-// No working public URLs are present in the source portfolio.
+// Entries without a verified liveUrl stay in the content model but are not rendered.
 export const webProjects: Project[] = [
-  ['nexora', 'PCServiceDemo Nexora'], ['english', 'English website'],
-  ['norden', 'NORDEN-HOME'], ['mira', 'MIRA'], ['artcloseup', 'artcloseup'],
-].map(([id, name]) => ({ id, name, kind: 'web', type: { ru: 'Веб-проект', en: 'Web project' } }))
+  {
+    id: 'nexora', name: 'NEXORA', kind: 'web',
+    type: { ru: 'Демонстрационный сайт', en: 'Demo website' },
+    description: {
+      ru: 'Демонстрационный сайт компьютерного сервиса с каталогом, фильтрами, калькулятором и формой заявки. В проекте также есть backend и read-only admin demo.',
+      en: 'A computer service demo with a catalogue, filters, a price calculator and a request form, supported by a backend and a read-only admin demo.',
+    },
+    localizedTags: [
+      { ru: 'Каталог', en: 'Catalogue' },
+      { ru: 'Фильтры', en: 'Filters' },
+      { ru: 'Калькулятор', en: 'Calculator' },
+      { ru: 'Backend', en: 'Backend' },
+    ],
+    cover: nexoraPreview,
+    previewAlt: {
+      ru: 'Главная страница сайта компьютерного сервиса NEXORA',
+      en: 'NEXORA computer service website homepage',
+    },
+    liveUrl: 'https://nexora-demo-3ro5.onrender.com/',
+    liveKind: 'demo',
+  },
+  {
+    id: 'norden', name: 'NORDEN', kind: 'web',
+    type: { ru: 'Веб-проект', en: 'Web project' },
+  },
+  {
+    id: 'mira', name: 'MIRA', kind: 'web',
+    type: { ru: 'Веб-проект', en: 'Web project' },
+  },
+  {
+    id: 'english-tutor', name: 'English Tutor', kind: 'web',
+    type: { ru: 'Веб-проект', en: 'Web project' },
+  },
+  {
+    id: 'goal-pilot', name: 'Goal Pilot', kind: 'web',
+    type: { ru: 'Веб-проект', en: 'Web project' },
+  },
+]

@@ -1,5 +1,5 @@
 import './styles.css'
-import { aiProjects, creativeProjects, type Language, type Project } from './projects'
+import { aiProjects, artEducationProjects, webProjects, type Language, type Project } from './projects'
 
 let currentLanguage: Language = 'ru'
 let stopHeroEntrance = (): void => {}
@@ -106,7 +106,10 @@ const secondaryProject = (project: Project): string => `
   </article>`
 
 const creativeProject = (project: Project): string => {
-  const liveLabel = currentLanguage === 'ru' ? 'Открыть игру' : 'Open game'
+  const isWebsite = project.liveKind === 'site'
+  const liveLabel = currentLanguage === 'ru'
+    ? (isWebsite ? 'Открыть сайт' : 'Открыть игру')
+    : (isWebsite ? 'Open site' : 'Open game')
   const action = project.liveUrl
     ? `<a class="button button-primary" href="${escapeHtml(project.liveUrl)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(`${liveLabel} — ${project.name}`)}">${liveLabel}</a>`
     : ''
@@ -119,6 +122,33 @@ const creativeProject = (project: Project): string => {
         <h4>${escapeHtml(project.name)}</h4>
         <p class="creative-description">${escapeHtml(project.description?.[currentLanguage] ?? '')}</p>
         <div class="creative-actions">${action}</div>
+      </div>
+    </article>`
+}
+
+const webProject = (project: Project): string => {
+  const isDemo = project.liveKind === 'demo'
+  const label = currentLanguage === 'ru'
+    ? (isDemo ? 'Открыть демо' : 'Открыть сайт')
+    : (isDemo ? 'Open demo' : 'Open site')
+  const ariaLabel = currentLanguage === 'ru'
+    ? `${label} ${project.name} в новой вкладке`
+    : `${label} ${project.name} in a new tab`
+  const tags = project.localizedTags?.map((tag) => `<li>${escapeHtml(tag[currentLanguage])}</li>`).join('') ?? ''
+
+  return `
+    <article class="web-project reveal" id="${project.id}">
+      <figure class="web-project-preview">
+        <img src="${escapeHtml(project.cover ?? '')}" alt="${escapeHtml(project.previewAlt?.[currentLanguage] ?? '')}" loading="lazy" decoding="async" width="1440" height="900" />
+      </figure>
+      <div class="web-project-copy">
+        <p class="web-project-type">${escapeHtml(project.type[currentLanguage])}</p>
+        <h4>${escapeHtml(project.name)}</h4>
+        <p class="web-project-description">${escapeHtml(project.description?.[currentLanguage] ?? '')}</p>
+        ${tags ? `<ul class="web-project-tags" aria-label="${currentLanguage === 'ru' ? 'Категории и возможности' : 'Categories and features'}">${tags}</ul>` : ''}
+        <a class="web-project-link" href="${escapeHtml(project.liveUrl ?? '')}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(ariaLabel)}">
+          <span>${label}</span><span aria-hidden="true">↗</span>
+        </a>
       </div>
     </article>`
 }
@@ -140,10 +170,18 @@ const renderProjects = (): void => {
   const ordered = (ids: string[]): Project[] => ids.flatMap((id) => aiProjects.filter((project) => project.id === id))
   const featured = document.getElementById('featured-projects')
   const secondary = document.getElementById('secondary-projects')
-  const creative = document.getElementById('creative-projects')
+  const webGroup = document.getElementById('web-projects-group')
+  const web = document.getElementById('web-project-list')
+  const artEducationGroup = document.getElementById('art-education-projects-group')
+  const artEducation = document.getElementById('art-education-projects')
   if (featured) featured.innerHTML = ordered(['autoprofi', 'quote', 'roadmap']).map(featuredCase).join('')
   if (secondary) secondary.innerHTML = ordered(['yandex-mail', 'page', 'sorter']).map(secondaryProject).join('')
-  if (creative) creative.innerHTML = creativeProjects.map(creativeProject).join('')
+  const publishedWebProjects = webProjects.filter((project) => Boolean(project.liveUrl))
+  if (web) web.innerHTML = publishedWebProjects.map(webProject).join('')
+  if (webGroup) webGroup.hidden = publishedWebProjects.length === 0
+  const publishedArtEducationProjects = artEducationProjects.filter((project) => Boolean(project.liveUrl))
+  if (artEducation) artEducation.innerHTML = publishedArtEducationProjects.map(creativeProject).join('')
+  if (artEducationGroup) artEducationGroup.hidden = publishedArtEducationProjects.length === 0
   applyRussianTypography()
 }
 
