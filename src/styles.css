@@ -384,6 +384,12 @@ section[id], main[id], .project-group h3[id] {
   max-width: var(--hero-text-w);
 }
 
+@media (min-width: 861px) {
+  .hero-copy {
+    top: -70px;
+  }
+}
+
 .eyebrow,
 .section-index,
 .group-number,

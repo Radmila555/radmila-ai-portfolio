@@ -7,6 +7,7 @@ import sorterCover from '../Video/posters/sorter.webp'
 import pageCover from '../Video/posters/page.webp'
 import nexoraPreview from './assets/web-projects/nexora-preview.webp'
 import nordenPreview from './assets/web-projects/norden-preview.webp'
+import miraPreview from './assets/web-projects/mira-preview.webp'
 import artCloseupCover from './assets/art-education/artcloseup-preview.webp'
 import autoConversation from '../Video/frames/autoprofi-conversation.webp'
 import autoBooking from '../Video/frames/autoprofi-booking.webp'
@@ -258,8 +259,25 @@ export const webProjects: Project[] = [
     liveKind: 'demo',
   },
   {
-    id: 'mira', name: 'MIRA', kind: 'web',
+    id: 'mira', name: 'MIRA — студия массажа и восстановления', kind: 'web',
     type: { ru: 'Веб-проект', en: 'Web project' },
+    description: {
+      ru: 'Адаптивный demo-сайт студии массажа с пошаговой онлайн-записью, Express API, SQLite и админ-панелью.',
+      en: 'Responsive massage studio demo with step-by-step booking, an Express API, SQLite, and an admin dashboard.',
+    },
+    localizedTags: [
+      { ru: 'JavaScript', en: 'JavaScript' },
+      { ru: 'Express', en: 'Express' },
+      { ru: 'SQLite', en: 'SQLite' },
+      { ru: 'Responsive Design', en: 'Responsive Design' },
+    ],
+    cover: miraPreview,
+    previewAlt: {
+      ru: 'Главная страница студии массажа и восстановления MIRA',
+      en: 'MIRA massage and recovery studio homepage',
+    },
+    liveUrl: 'https://mira-smx2.onrender.com/',
+    liveKind: 'demo',
   },
   {
     id: 'english-tutor', name: 'English Tutor', kind: 'web',
