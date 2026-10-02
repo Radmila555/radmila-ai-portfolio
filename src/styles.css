@@ -2047,16 +2047,18 @@ body.demo-open { overflow: hidden; }
   line-height: 1.56;
 }
 
-.featured-credit a {
-  color: #c9d7f4;
-  text-decoration-color: rgba(201, 215, 244, 0.48);
+.featured-credit a,
+.featured-credit a:visited {
+  color: var(--cyan);
+  text-decoration-line: underline;
+  text-decoration-color: currentColor;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
   transition: color 180ms ease, text-decoration-color 180ms ease;
 }
 
 .featured-credit a:hover {
-  color: var(--cyan);
+  color: #dff9ff;
   text-decoration-color: currentColor;
 }
 
