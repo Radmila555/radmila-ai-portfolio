@@ -8,6 +8,7 @@ import pageCover from '../Video/posters/page.webp'
 import nexoraPreview from './assets/web-projects/nexora-preview.webp'
 import nordenPreview from './assets/web-projects/norden-preview.webp'
 import miraPreview from './assets/web-projects/mira-preview.webp'
+import englishTutorPreview from './assets/web-projects/english-tutor-preview.webp'
 import artCloseupCover from './assets/art-education/artcloseup-preview.webp'
 import autoConversation from '../Video/frames/autoprofi-conversation.webp'
 import autoBooking from '../Video/frames/autoprofi-booking.webp'
@@ -282,6 +283,24 @@ export const webProjects: Project[] = [
   {
     id: 'english-tutor', name: 'English Tutor', kind: 'web',
     type: { ru: 'Веб-проект', en: 'Web project' },
+    description: {
+      ru: 'Лендинг репетитора английского для взрослых начинающих с трёхшаговой заявкой и демонстрационной админ-панелью.',
+      en: 'English tutor landing page for adult beginners with a three-step application form and demo admin panel.',
+    },
+    localizedTags: [
+      { ru: 'HTML', en: 'HTML' },
+      { ru: 'CSS', en: 'CSS' },
+      { ru: 'JavaScript', en: 'JavaScript' },
+      { ru: 'Express', en: 'Express' },
+      { ru: 'SQLite', en: 'SQLite' },
+    ],
+    cover: englishTutorPreview,
+    previewAlt: {
+      ru: 'Главная страница демонстрационного сайта репетитора English Tutor',
+      en: 'English Tutor demo website homepage',
+    },
+    liveUrl: 'https://english-tutor-demo.onrender.com/',
+    liveKind: 'demo',
   },
   {
     id: 'goal-pilot', name: 'Goal Pilot', kind: 'web',
